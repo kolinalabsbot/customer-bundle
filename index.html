@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Customer-bundle by kolinalabs</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Customer-bundle</h1>
+          <h2>Simplified customer management, extensible and integrated with FOSUserBundle</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/kolinalabs/customer-bundle/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/kolinalabs/customer-bundle/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/kolinalabs/customer-bundle" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a id="kolinacustomerbundle" class="anchor" href="#kolinacustomerbundle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>KolinaCustomerBundle</h1>
+
+<p>Simplified management clients, extensible and integrated with FOSUserBundle</p>
+
+<h2>
+<a id="1-installation-and-configuration" class="anchor" href="#1-installation-and-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Installation and Configuration</h2>
+
+<h5>
+<a id="caution-this-package-is-under-development" class="anchor" href="#caution-this-package-is-under-development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Caution: This package is under development!</h5>
+
+<h4>
+<a id="11-download-kolinacustomerbundle-using-composer" class="anchor" href="#11-download-kolinacustomerbundle-using-composer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.1 Download KolinaCustomerBundle using composer</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ composer require kolinalabs/customer-bundle <span class="pl-s"><span class="pl-pds">"</span>dev-master<span class="pl-pds">"</span></span></pre></div>
+
+<p>After downloading the package</p>
+
+<h4>
+<a id="12-enable-the-bundle" class="anchor" href="#12-enable-the-bundle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.2 Enable the bundle</h4>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&lt;</span><span class="pl-k">?</span>php
+// app/AppKernel.php
+public <span class="pl-k">function</span> <span class="pl-en">registerBundles()</span>
+{
+    <span class="pl-smi">$bundles</span> = array(
+        // ...
+        new Kolina<span class="pl-cce">\C</span>ustomerBundle<span class="pl-cce">\K</span>olinaCustomerBundle(),
+        // ...
+    )<span class="pl-k">;</span>
+}</pre></div>
+
+<h4>
+<a id="13-create-your-customer-class-tested-with-xml-mapping" class="anchor" href="#13-create-your-customer-class-tested-with-xml-mapping" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.3 Create your customer class <a href="http://doctrine-orm.readthedocs.io/projects/doctrine-orm/en/latest/reference/xml-mapping.html">Tested with xml mapping</a>
+</h4>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&lt;</span><span class="pl-k">?</span>php
+// src/AppBundle/Entity/Customer.php
+namespace AppBundle<span class="pl-cce">\E</span>ntity<span class="pl-k">;</span>
+
+use Kolina<span class="pl-cce">\C</span>ustomerBundle<span class="pl-cce">\E</span>ntity<span class="pl-cce">\C</span>ustomer as AbstractCustomer<span class="pl-k">;</span>
+
+/<span class="pl-k">**</span>
+ <span class="pl-k">*</span> Customer
+ <span class="pl-k">*</span>/
+class Customer extends AbstractCustomer
+{
+    // Your custom properties and methods
+}</pre></div>
+
+<h4>
+<a id="14-configure-appconfigyml" class="anchor" href="#14-configure-appconfigyml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.4 Configure app/config.yml</h4>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"># app/config.yml</span>
+kolina_customer:
+    entity: AppBundle<span class="pl-cce">\E</span>ntity<span class="pl-cce">\C</span>ustomer</pre></div>
+
+<h2>
+<a id="2-crud" class="anchor" href="#2-crud" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. CRUD</h2>
+
+<h3>
+<a id="21-access-the-service-manager-in-the-controller" class="anchor" href="#21-access-the-service-manager-in-the-controller" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.1 Access the service manager in the controller</h3>
+
+<div class="highlight highlight-source-shell"><pre>/<span class="pl-k">**</span>
+ <span class="pl-k">*</span> @<span class="pl-k">return</span> <span class="pl-cce">\K</span>olina<span class="pl-cce">\C</span>ustomerBundle<span class="pl-cce">\E</span>ntity<span class="pl-cce">\C</span>ustomerManager
+ <span class="pl-k">*</span>/
+private <span class="pl-k">function</span> <span class="pl-en">getCustomerManager()</span>
+{
+    <span class="pl-k">return</span> <span class="pl-smi">$this</span>-<span class="pl-k">&gt;</span>get(<span class="pl-s"><span class="pl-pds">'</span>kolina_customer.manager<span class="pl-pds">'</span></span>)<span class="pl-k">;</span>
+}</pre></div>
+
+<h3>
+<a id="22-example-usage" class="anchor" href="#22-example-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.2 Example usage</h3>
+
+<div class="highlight highlight-source-shell"><pre>// Create Customer Object
+...
+<span class="pl-smi">$manager</span> = <span class="pl-smi">$this</span><span class="pl-en">-&gt;getCustomerManager</span>();
+<span class="pl-smi">$customer</span> = <span class="pl-smi">$manager</span><span class="pl-en">-&gt;create</span>();
+
+<span class="pl-smi">$customer</span>
+        -<span class="pl-k">&gt;</span>setFirstname(<span class="pl-s"><span class="pl-pds">'</span>Foo<span class="pl-pds">'</span></span>)
+        -<span class="pl-k">&gt;</span>setLastname(<span class="pl-s"><span class="pl-pds">'</span>Bar<span class="pl-pds">'</span></span>)
+        //... other setter methods - 
+        //... see <span class="pl-cce">\K</span>olina<span class="pl-cce">\C</span>ustomerBundle<span class="pl-cce">\E</span>ntity<span class="pl-cce">\C</span>ustomerInterface
+        <span class="pl-k">;</span>
+
+<span class="pl-smi">$manager</span>-<span class="pl-k">&gt;</span>save(<span class="pl-smi">$customer</span>)<span class="pl-k">;</span>
+...</pre></div>
+        </section>
+
+        <footer>
+          Customer-bundle is maintained by <a href="https://github.com/kolinalabs">kolinalabs</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
